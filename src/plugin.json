@@ -1,6 +1,6 @@
 {
   "type": "panel",
-  "name": "Worldmap Panel",
+  "name": "Worldmap Panel (I)",
   "id": "grafana-worldmap-interactive-panel",
 
   "info": {
