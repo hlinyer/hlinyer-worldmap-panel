@@ -188,6 +188,12 @@ export default class WorldMap {
     return circleSizeRange * dataFactor + circleMinSize;
   }
 
+  updateTimeRange(evt) {
+    //remove indices
+    var datetime = evt.target._popup._content.split(' ')[0].slice(0, -1);
+    this.ctrl.setRange(datetime);
+  }
+
   createPopup(circle, locationName, value) {
     const unit = value && value === 1 ? this.ctrl.panel.unitSingular : this.ctrl.panel.unitPlural;
     const label = (locationName + ': ' + value + ' ' + (unit || '')).trim();
@@ -196,6 +202,9 @@ export default class WorldMap {
       className: 'worldmap-popup',
       closeButton: this.ctrl.panel.stickyLabels,
     });
+
+    // Send coordinates on click
+    circle.on('click', this.updateTimeRange.bind(this));
 
     circle.on('mouseover', function onMouseOver(evt) {
       const layer = evt.target;

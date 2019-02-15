@@ -5,6 +5,7 @@ import * as _ from 'lodash';
 import DataFormatter from './data_formatter';
 import './css/worldmap-panel.css';
 import $ from 'jquery';
+import moment from 'moment';
 import './css/leaflet.css';
 import WorldMap from './worldmap';
 
@@ -131,6 +132,14 @@ export default class WorldmapCtrl extends MetricsPanelCtrl {
         this.reloadLocations.bind(this)
       );
     }
+  }
+
+  // Read item value and parse it to date
+  setRange(datetime) {
+    const parsedTime = moment(datetime);
+    let from = parsedTime.clone().subtract(5, 'minutes');
+    let to = parsedTime.clone().add(5, 'minutes');
+    this.timeSrv.setTime({ from: from.format(), to: to.format() });
   }
 
   reloadLocations(res) {

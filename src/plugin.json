@@ -1,10 +1,10 @@
 {
   "type": "panel",
   "name": "Worldmap Panel",
-  "id": "grafana-worldmap-panel",
+  "id": "grafana-worldmap-interactive-panel",
 
   "info": {
-    "description": "World Map panel for Grafana. Displays time series data or geohash data from Elasticsearch overlaid on a world map.",
+    "description": "World Map panel for Grafana, with interaction with dashboard's time range",
     "author": {
       "name": "Grafana Labs",
       "url": "https://grafana.com"
@@ -16,6 +16,7 @@
     },
     "links": [
       {"name": "Project site", "url": "https://github.com/grafana/worldmap-panel"},
+      {"name": "Fork site", "url": "https://github.com/hlinyer/worldmap-panel"},
       {"name": "MIT License", "url": "https://github.com/grafana/worldmap-panel/blob/master/LICENSE"}
     ],
     "screenshots": [
@@ -24,7 +25,7 @@
       {"name": "Light Theme", "path": "images/worldmap-light-theme.png"}
     ],
     "version": "0.1.2",
-    "updated": "2018-07-16"
+    "updated": "2019-02-15"
   },
 
   "dependencies": {
