@@ -128,7 +128,7 @@ export default class WorldmapCtrl extends MetricsPanelCtrl {
     } else if (this.panel.locationData === 'table') {
       // .. Do nothing
     } else if (this.panel.locationData !== 'geohash' && this.panel.locationData !== 'json result') {
-      $.getJSON('public/plugins/grafana-worldmap-panel/data/' + this.panel.locationData + '.json').then(
+      $.getJSON('public/plugins/grafana-worldmap-interactive-panel/data/' + this.panel.locationData + '.json').then(
         this.reloadLocations.bind(this)
       );
     }
@@ -162,7 +162,7 @@ export default class WorldmapCtrl extends MetricsPanelCtrl {
   }
 
   onInitEditMode() {
-    this.addEditorTab('Worldmap', 'public/plugins/grafana-worldmap-panel/partials/editor.html', 2);
+    this.addEditorTab('Worldmap', 'public/plugins/grafana-worldmap-interactive-panel/partials/editor.html', 2);
   }
 
   onDataReceived(dataList) {
