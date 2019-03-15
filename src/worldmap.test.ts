@@ -331,7 +331,7 @@ describe('Worldmap', () => {
       },
       tileServer: 'CartoDB Positron',
     };
-    worldMap = new WorldMap(ctrl, document.getElementsByClassName('mapcontainer')[0]);
+    worldMap = new WorldMap(ctrl, document.getElementsByClassName('mapcontainer')[0], true);
     worldMap.createMap();
   }
 });

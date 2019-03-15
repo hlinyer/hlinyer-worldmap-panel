@@ -136,10 +136,20 @@ export default class WorldmapCtrl extends MetricsPanelCtrl {
 
   // Read item value and parse it to date
   setRange(datetime) {
-    const parsedTime = moment(datetime);
+    // handle timezones
+    let parsedTime = moment(datetime);
+    if (this.dashboard.getTimezone() != "utc") {
+      parsedTime = parsedTime.utc()
+    } else {
+      parsedTime.utcOffset(0, true)
+    }
+    // show a 10 minutes interval
     let from = parsedTime.clone().subtract(5, 'minutes');
     let to = parsedTime.clone().add(5, 'minutes');
-    this.timeSrv.setTime({ from: from.format(), to: to.format() });
+    this.timeSrv.setTime({
+      from: from.format(),
+      to: to.format()
+    });
   }
 
   reloadLocations(res) {
@@ -297,7 +307,8 @@ export default class WorldmapCtrl extends MetricsPanelCtrl {
       }
 
       if (!ctrl.map) {
-        const map = new WorldMap(ctrl, mapContainer[0]);
+        let isUtc = (ctrl.dashboard.getTimezone() == "utc")
+        const map = new WorldMap(ctrl, mapContainer[0], isUtc);
         map.createMap();
         ctrl.map = map;
       }

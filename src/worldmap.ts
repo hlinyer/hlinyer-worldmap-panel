@@ -1,6 +1,7 @@
 import * as _ from 'lodash';
 import * as L from './libs/leaflet';
 import WorldmapCtrl from './worldmap_ctrl';
+import moment from 'moment';
 
 const tileServers = {
   'CartoDB Positron': {
@@ -22,14 +23,16 @@ const tileServers = {
 export default class WorldMap {
   ctrl: WorldmapCtrl;
   mapContainer: any;
+  isUtc: boolean;
   circles: any[];
   map: any;
   legend: any;
   circlesLayer: any;
 
-  constructor(ctrl, mapContainer) {
+  constructor(ctrl, mapContainer, isUtc) {
     this.ctrl = ctrl;
     this.mapContainer = mapContainer;
+    this.isUtc = isUtc;
     this.circles = [];
   }
 
@@ -189,14 +192,17 @@ export default class WorldMap {
   }
 
   updateTimeRange(evt) {
-    //remove indices
-    var datetime = evt.target._popup._content.split(' ')[0].slice(0, -1);
+    var datetime = evt.target._popup._content.trim();
     this.ctrl.setRange(datetime);
   }
 
   createPopup(circle, locationName, value) {
-    const unit = value && value === 1 ? this.ctrl.panel.unitSingular : this.ctrl.panel.unitPlural;
-    const label = (locationName + ': ' + value + ' ' + (unit || '')).trim();
+    if (this.isUtc == false) {
+      let utcDateStr = moment.utc(locationName).format('YYYY-MM-DD HH:mm:ss');
+      let utcDate = moment.utc(utcDateStr).toDate()
+      locationName = moment(utcDate).local().format('YYYY-MM-DD HH:mm:ss')
+    }
+    const label = (locationName).trim();
     circle.bindPopup(label, {
       offset: (<any>window).L.point(0, -2),
       className: 'worldmap-popup',
