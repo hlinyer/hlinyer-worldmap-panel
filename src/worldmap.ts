@@ -18,6 +18,11 @@ const tileServers = {
       '&copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
     subdomains: 'abcd',
   },
+  'Carto Local': {
+    url: 'http://localhost:8090/local/{z}/{x}/{y}.png?origin=top',
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> ',
+    subdomains: 'abcd',
+  }
 };
 
 export default class WorldMap {
